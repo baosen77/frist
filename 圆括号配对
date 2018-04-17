@@ -1,0 +1,48 @@
+/*题目描述
+设计一个算法检查算数表达式的圆括号是否匹配。
+
+输入
+算数表达式
+
+输出
+圆括号匹配：OK
+圆括号不匹配：Error
+
+样例输入
+(a+b)
+样例输出
+OK*/
+/*思路：利用栈进行判断。若碰到左括号，则入栈，若碰到右括号，则出栈，若出栈时发现栈已经空了，说明此时的右括号无对应的左括号，表达式错误。表达式解析完成后，
+若栈不空，说明有左括号无对应的右括号，表达式错误。*/
+#include<iostream>
+#include<stack>
+#include<string>
+using namespace std;
+using std::stack;
+int check(const char*a)
+{
+	int i = 0;
+	stack<char>s;
+	while (a[i])
+	{
+		if (a[i] == '(')
+			s.push(a[i]);
+	    else if ((a[i] == ')') && (!s.empty()))
+			s.pop();
+	    else if((a[i]==')')&&(s.empty()))
+			return 0;
+		i++;
+	}
+	if (s.empty())
+		return 1;
+	else return 0;
+}
+int main()
+{
+	string s;
+	cin >> s;
+	if (check(s.c_str()))
+		cout << "OK" << endl;
+	else
+		cout << "Error" << endl;
+}
