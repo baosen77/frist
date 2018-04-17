@@ -1,0 +1,28 @@
+/*给出两个不大于65535的非负整数，判断其中一个的16位二进制表示形式，是否能由另一个的16位二进制表示形式经过<循环左移>若干位而得到。*/
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n;
+	unsigned short a, b, a1, a2;
+	cin >> n;
+	while (n--)
+	{
+		cin >> a >> b;
+		int num = 0;
+		   for (int i = 0; i < 16; i++)
+			{
+				a1 = a << i;
+				a2 = a >> (16 - i);
+				if ((a1 | a2) == b)
+				{
+					num = 1;
+					break;
+				}
+			}
+		if (num == 1)
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+	}
+}
